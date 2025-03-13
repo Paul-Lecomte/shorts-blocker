@@ -1,25 +1,16 @@
-// Function to toggle Shorts blocking based on the state
-function toggleShortsBlocking(isEnabled) {
+const blockShorts = () => {
     const url = window.location.href;
+
     if (url.includes("/shorts/")) {
-        if (isEnabled) {
-            window.location.replace("https://www.youtube.com");
-        }
+        // If it's a Shorts URL, redirect to the main YouTube page.
+        window.location.replace("https://www.youtube.com");
     }
 
+    // You can also block Shorts sections on the main page:
     const shortsSection = document.querySelector("ytd-rich-grid-media[href*='/shorts/']");
     if (shortsSection) {
-        if (isEnabled) {
-            shortsSection.style.display = 'none'; // Hide the Shorts section
-        } else {
-            shortsSection.style.display = ''; // Show the Shorts section
-        }
+        shortsSection.style.display = 'none'; // Hide the Shorts video section
     }
-}
+};
 
-// Listen for messages from popup.js
-chrome.runtime.onMessage.addListener((message) => {
-    if (message.action === 'toggleBlocking') {
-        toggleShortsBlocking(message.isBlockingEnabled);
-    }
-});
+setInterval(blockShorts, 10); // Check and block.

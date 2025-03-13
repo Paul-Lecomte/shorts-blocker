@@ -1,5 +1,3 @@
-// popup.js
-
 // Get the toggle button
 const toggleButton = document.getElementById('toggle');
 
@@ -21,34 +19,14 @@ toggleButton.addEventListener('click', () => {
     localStorage.setItem('isBlockingEnabled', isBlockingEnabled.toString());
     updateButton();
 
-    // Optionally, you can send a message to the content script to update the blocking state
+    // Send a message to the content script to toggle blocking
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        chrome.scripting.executeScript({
-            target: { tabId: tabs[0].id },
-            func: toggleShortsBlocking,
-            args: [isBlockingEnabled],
+        chrome.tabs.sendMessage(tabs[0].id, {
+            action: 'toggleBlocking',
+            isBlockingEnabled: isBlockingEnabled
         });
     });
 });
-
-// Function to toggle Shorts blocking based on the state
-function toggleShortsBlocking(isEnabled) {
-    const url = window.location.href;
-    if (url.includes("/shorts/")) {
-        if (isEnabled) {
-            window.location.replace("https://www.youtube.com");
-        }
-    }
-
-    const shortsSection = document.querySelector("ytd-rich-grid-media[href*='/shorts/']");
-    if (shortsSection) {
-        if (isEnabled) {
-            shortsSection.style.display = 'none'; // Hide the Shorts section
-        } else {
-            shortsSection.style.display = ''; // Show the Shorts section
-        }
-    }
-}
 
 // Initialize the button state when the popup opens
 updateButton();
