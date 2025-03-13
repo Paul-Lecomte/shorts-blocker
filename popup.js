@@ -1,7 +1,9 @@
+// popup.js
+
 // Get the toggle button
 const toggleButton = document.getElementById('toggle');
 
-// Check the current status of blocking
+// Check the current status of blocking (you can store this in localStorage for persistence)
 let isBlockingEnabled = localStorage.getItem('isBlockingEnabled') === 'true';
 
 // Function to update the button text and state
@@ -28,3 +30,25 @@ toggleButton.addEventListener('click', () => {
         });
     });
 });
+
+// Function to toggle Shorts blocking based on the state
+function toggleShortsBlocking(isEnabled) {
+    const url = window.location.href;
+    if (url.includes("/shorts/")) {
+        if (isEnabled) {
+            window.location.replace("https://www.youtube.com");
+        }
+    }
+
+    const shortsSection = document.querySelector("ytd-rich-grid-media[href*='/shorts/']");
+    if (shortsSection) {
+        if (isEnabled) {
+            shortsSection.style.display = 'none'; // Hide the Shorts section
+        } else {
+            shortsSection.style.display = ''; // Show the Shorts section
+        }
+    }
+}
+
+// Initialize the button state when the popup opens
+updateButton();
