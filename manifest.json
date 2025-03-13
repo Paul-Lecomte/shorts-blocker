@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "Block YouTube Shorts",
+  "description": "This extension blocks YouTube Shorts.",
+  "version": "1.0",
+  "permissions": [
+    "activeTab"
+  ],
