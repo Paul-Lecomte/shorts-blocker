@@ -7,22 +7,33 @@ function removeShorts() {
     }
 }
 
-// Run the function immediately on page load
-removeShorts();
+// Function to check the stored blocking state
+function checkBlockingState() {
+    chrome.storage.local.get("isBlockingEnabled", (data) => {
+        if (data.isBlockingEnabled) {
+            removeShorts();
 
-// Monitor the page for changes and remove Shorts dynamically
-const observer = new MutationObserver(() => {
-    removeShorts();
-});
-observer.observe(document.body, { childList: true, subtree: true });
+            // Monitor for dynamically loaded Shorts
+            const observer = new MutationObserver(() => {
+                removeShorts();
+            });
+            observer.observe(document.body, { childList: true, subtree: true });
+        }
+    });
+}
+
+// Run on page load
+checkBlockingState();
 
 // Listen for messages from popup.js to toggle Shorts blocking
 chrome.runtime.onMessage.addListener((message) => {
-    if (message.action === 'toggleBlocking') {
+    if (message.action === "toggleBlocking") {
+        chrome.storage.local.set({ isBlockingEnabled: message.isBlockingEnabled });
+
         if (message.isBlockingEnabled) {
             removeShorts();
         } else {
-            location.reload(); // Reload to restore Shorts if re-enabled
+            location.reload(); // Reload page to restore Shorts
         }
     }
 });
