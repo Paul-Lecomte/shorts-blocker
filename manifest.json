@@ -4,7 +4,8 @@
   "description": "This extension blocks YouTube Shorts.",
   "version": "1.0",
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "content_scripts": [
     {
@@ -19,8 +20,6 @@
     "default_popup": "popup.html"
   },
   "icons": {
-    "16": "icon.webp",
-    "48": "icon.webp",
-    "128": "icon.webp"
+    "16": "icon.webp"
   }
 }
