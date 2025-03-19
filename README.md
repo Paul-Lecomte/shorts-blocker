@@ -1,3 +1,4 @@
+![logo](icon.png)
 # YouTube Shorts Blocker Extension
 
 This browser extension blocks YouTube Shorts content, helping you focus on regular YouTube videos. You can enable or disable the blocking feature directly from the extension's popup.
