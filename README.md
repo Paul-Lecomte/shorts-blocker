@@ -16,7 +16,7 @@ This browser extension blocks YouTube Shorts content, helping you focus on regul
 1. **Clone or Download** the repository:
     - Clone the repository using Git:
       ```bash
-      git clone <repo-url>
+      git clone https://github.com/Paul-Lecomte/shorts-blocker.git
       ```
     - Or download the repository as a ZIP file and extract it.
 
