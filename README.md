@@ -36,15 +36,6 @@ This browser extension blocks YouTube Shorts content, helping you focus on regul
 - **Content Script**: The extension runs a content script on `youtube.com/*` pages. If a Shorts URL is detected, the page is redirected to the main YouTube page. Additionally, any Shorts video sections are hidden.
 - **Popup Interface**: The popup allows users to toggle the blocking feature, which is stored locally using `localStorage`.
 
-## Development
-
-To make changes or develop further:
-
-1. Clone the repository to your local machine.
-2. Open the `manifest.json` file and adjust any properties.
-3. Modify `popup.html`, `popup.js`, `content.js`, or other files as needed.
-4. Load the extension into Chrome as described in the installation steps.
-
 ## License
 
 This project is open-source and free to use under the [MIT License](LICENSE).
